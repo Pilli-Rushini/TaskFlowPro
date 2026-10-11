@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Pro | Placement Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Welcome screen -->
+  <section id="welcomeScreen" class="welcome-screen">
+    <div class="welcome-card">
+      <div class="logo-icon">✓</div>
+      <h1>TaskFlow <span>Pro</span></h1>
+      <p class="muted">Plan · Organize · Achieve</p>
+      <div class="welcome-art">🌷 ✨ 📚</div>
+      <h2>Your placement journey starts here!</h2>
+      <p id="welcomeQuote" class="quote"></p>
+
+      <form id="welcomeForm">
+        <label for="userName">What should we call you?</label>
+        <input id="userName" maxlength="40" placeholder="Enter your name" required>
+        <button class="primary-btn" type="submit">Start My Journey →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Main application -->
+  <div id="app" class="app-layout" hidden>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">✓</div>
+        <div>
+          <h2>TaskFlow <span>Pro</span></h2>
+          <small>Plan · Organize · Achieve</small>
+        </div>
+      </div>
+
+      <nav id="sidebarNav">
+        <button class="nav-item active" data-view="dashboard">⌂ Dashboard</button>
+        <button class="nav-item" data-view="learning">📚 Learning Hub</button>
+        <button class="nav-item" data-view="tasks">☷ My Tasks</button>
+        <button class="nav-item" data-view="schedule">🗓 My Schedule</button>
+        <button class="nav-item" data-view="completed">✓ Completed</button>
+      </nav>
+
+      <div class="sidebar-quote">
+        🌱
+        <p>Small steps every day lead to big results!</p>
+      </div>
+      <button id="changeUser" class="nav-item">↻ Change name</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL PLACEMENT WORKSPACE</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="profile">
+          <span id="todayDate"></span>
+          <span class="avatar">☺</span>
+          <strong id="displayName"></strong>
+        </div>
+      </header>
+
+      <!-- DASHBOARD VIEW -->
+      <section class="page-view" id="view-dashboard">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">A NEW DAY, A NEW OPPORTUNITY</p>
+            <h2 id="greeting">Welcome!</h2>
+            <p id="dailyQuote"></p>
+            <p class="hero-note">✨ You are one step closer to your dream job!</p>
+          </div>
+
+          <div class="hero-image">
+            <img id="girlImage"
+              src="https://share.google/9yDPei5z1ZtlcigQg.png"
+              alt="Girl studying at a desk"
+              onerror="this.style.display='none'; document.getElementById('imageFallback').hidden=false;">
+            <div id="imageFallback" hidden>
+              <span>👩🏻‍💻</span>
+              <p>Dream · Learn · Achieve</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <article class="stat-card purple">
+            <span class="stat-icon">📋</span>
+            <p>Total Tasks</p>
+            <h2 id="totalCount">0</h2>
+            <small>Your learning goals</small>
+          </article>
+          <article class="stat-card orange">
+            <span class="stat-icon">⏳</span>
+            <p>Pending Tasks</p>
+            <h2 id="pendingCount">0</h2>
+            <small>Keep moving forward</small>
+          </article>
+          <article class="stat-card green">
+            <span class="stat-icon">✓</span>
+            <p>Completed Tasks</p>
+            <h2 id="completedCount">0</h2>
+            <small>Celebrate your progress</small>
+          </article>
+        </div>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>✨ Today's Motivation</h2>
+              <p id="motivationText">You can do this!</p>
+            </div>
+            <button id="newQuoteBtn" class="secondary-btn" type="button">
+              New quote ↻
+            </button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>🚀 Explore Your Learning Hub</h2>
+              <p>Choose a subject and start learning.</p>
+            </div>
+            <button class="secondary-btn" data-go="learning" type="button">
+              View all →
+            </button>
+          </div>
+          <div id="dashboardCourses" class="course-grid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>＋ Add a New Task</h2>
+              <p>Turn your goals into daily actions.</p>
+            </div>
+          </div>
+          <form id="taskForm" class="task-form">
+            <input id="taskInput" maxlength="150"
+              placeholder="e.g. Practice Python loops" required>
+            <select id="categoryInput" aria-label="Task subject">
+              <option>General</option>
+              <option>Python</option>
+              <option>Java</option>
+              <option>DSA</option>
+              <option>SQL</option>
+              <option>Aptitude</option>
+              <option>Reasoning</option>
+              <option>Interview Preparation</option>
+            </select>
+            <select id="priorityInput" aria-label="Task priority">
+              <option value="Medium">Medium priority</option>
+              <option value="High">High priority</option>
+              <option value="Low">Low priority</option>
+            </select>
+            <input id="taskDate" type="date" aria-label="Task date">
+            <input id="taskTime" type="time" aria-label="Task time">
+            <button class="primary-btn" type="submit">＋ Add Task</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>☷ Your Upcoming Tasks</h2>
+              <p>A quick look at what you need to do.</p>
+            </div>
+            <button class="secondary-btn" data-go="tasks" type="button">
+              Manage tasks →
+            </button>
+          </div>
+          <div id="dashboardTasks" class="task-list"></div>
+        </section>
+      </section>
+
+      <!-- LEARNING HUB VIEW -->
+      <section class="page-view" id="view-learning" hidden>
+        <div class="intro-banner">
+          <p class="eyebrow">LEARN • PRACTICE • GET PLACED</p>
+          <h2>Build skills for your dream job 💜</h2>
+          <p>Choose a subject to open its learning platform in a new tab.</p>
+        </div>
+        <div id="learningCourses" class="course-grid"></div>
+        <p class="small-note">
+          Learning links open external websites. You can also add any subject
+          to your personal task schedule.
+        </p>
+      </section>
+
+      <!-- MY TASKS VIEW -->
+      <section class="page-view" id="view-tasks" hidden>
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>☷ My Tasks</h2>
+              <p>Create, search, filter and manage your study goals.</p>
+            </div>
+          </div>
+
+          <form id="taskForm2" class="task-form">
+            <input id="taskInput2" maxlength="150"
+              placeholder="Enter a task to study..." required>
+            <select id="categoryInput2" aria-label="Task subject">
+              <option>General</option>
+              <option>Python</option>
+              <option>Java</option>
+              <option>DSA</option>
+              <option>SQL</option>
+              <option>Aptitude</option>
+              <option>Reasoning</option>
+              <option>Interview Preparation</option>
+            </select>
+            <select id="priorityInput2" aria-label="Task priority">
+              <option value="Medium">Medium priority</option>
+              <option value="High">High priority</option>
+              <option value="Low">Low priority</option>
+            </select>
+            <input id="taskDate2" type="date" aria-label="Task date">
+            <input id="taskTime2" type="time" aria-label="Task time">
+            <button class="primary-btn" type="submit">＋ Add Task</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="🔍 Search tasks...">
+            <select id="categoryFilter" aria-label="Filter by subject">
+              <option value="all">All subjects</option>
+              <option>General</option>
+              <option>Python</option>
+              <option>Java</option>
+              <option>DSA</option>
+              <option>SQL</option>
+              <option>Aptitude</option>
+              <option>Reasoning</option>
+              <option>Interview Preparation</option>
+            </select>
+            <select id="filterInput" aria-label="Filter by status">
+              <option value="all">All tasks</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <div id="taskList" class="task-list"></div>
+          <p id="emptyMessage" class="empty-message" hidden>
+            🌷 No tasks found. Add a new task to get started.
+          </p>
+        </section>
+      </section>
+
+      <!-- SCHEDULE VIEW -->
+      <section class="page-view" id="view-schedule" hidden>
+        <div class="intro-banner">
+          <p class="eyebrow">YOUR TIME, YOUR FUTURE</p>
+          <h2>My Study Schedule 🗓</h2>
+          <p>Plan your study sessions with a date, time and subject.</p>
+        </div>
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>Upcoming Study Sessions</h2>
+              <p>Tasks with dates and times appear here in schedule order.</p>
+            </div>
+          </div>
+          <div id="scheduleList" class="task-list"></div>
+          <p id="scheduleEmpty" class="empty-message" hidden>
+            No scheduled sessions yet. Add a task with a date and time.
+          </p>
+        </section>
+      </section>
+
+      <!-- COMPLETED VIEW -->
+      <section class="page-view" id="view-completed" hidden>
+        <section class="panel">
+          <h2>🏆 Completed Tasks</h2>
+          <p>Every completed task is progress worth celebrating.</p>
+          <div id="completedList" class="task-list"></div>
+          <p id="completedEmpty" class="empty-message" hidden>
+            Your completed tasks will appear here. Keep going!
+          </p>
+        </section>
+      </section>
+
+      <footer>Made with 💜 for your goals · Progress, not perfection!</footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
